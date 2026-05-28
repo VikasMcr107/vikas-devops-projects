@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>DevOps Notes App</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <h1 class="text-primary mb-4">
+        DevOps Notes App
+    </h1>
+
+    <form action="/add" method="POST" class="d-flex gap-2 mb-4">
+
+        <input
+            type="text"
+            name="note"
+            placeholder="Enter a note"
+            class="form-control"
+        >
+
+        <button type="submit" class="btn btn-primary">
+            Add Note
+        </button>
+
+    </form>
+
+    <ul class="list-group">
+
+        {% for note in notes %}
+
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+
+            <div>
+                {{ note.task }}
+            </div>
+
+            <div>
+
+                <a href="/complete/{{ loop.index0 }}"
+                   class="btn btn-success btn-sm">
+                    Complete
+                </a>
+
+                <a href="/delete/{{ loop.index0 }}"
+                   class="btn btn-danger btn-sm">
+                    Delete
+                </a>
+
+                <a href="/edit/{{ loop.index0 }}"
+                   class="btn btn-warning btn-sm">
+                    Edit
+                </a>
+
+            </div>
+
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+</body>
+</html>

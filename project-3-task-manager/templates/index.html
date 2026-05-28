@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Devops Task Manager</title>
+    </head>
+    <body>
+        <h1>Devops Task Manager</h1>
+        <ul>
+            {% for task in tasks %}
+            <li>{{ task.task }}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
