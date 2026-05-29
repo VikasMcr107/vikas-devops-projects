@@ -1,21 +1,28 @@
-pipeline {
+pipeline{
     agent any
-
-    stages {
-
-        stage('Debug') {
-            steps {
-                bat 'cd'
-                bat 'dir'
+    stages{
+        stage('Build Docker Image'){
+             steps{
+                dir('project-4-sqlite-notes-app') {
+                   
+                
+                bat 'docker build -t sqlite-notes-app .'
+                // Add Docker build commands here
             }
         }
+        stage('Stop Old Container'){
+            steps{
+               bat 'docker stop sqlite-notes-app-container || exit 0'
+               bat 'docker rm sqlite-notes-app-container || exit 0'
+                // Add stop commands here
+            }
+        }
+        stage('Run New Container'){
+            steps{
+                bat 'docker run -d -p 5000:5000 --name sqlite-notes-app-container sqlite-notes-app'
+                // Add run commands here
 
-        stage('Debug Project Folder') {
-            steps {
-                dir('project-4-sqlite-notes-app') {
-                    bat 'cd'
-                    bat 'dir'
-                }
+       
             }
         }
     }
